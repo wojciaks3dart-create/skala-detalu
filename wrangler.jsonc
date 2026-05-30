@@ -1,0 +1,25 @@
+{
+  "name": "yes",
+  "main": "dist/server/entry.mjs",
+  "compatibility_date": "2026-04-15",
+
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS"
+  },
+
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "acc44bf787984d54bcc79febfb828eb6"
+    }
+  ],
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "skaladetalu-db",
+      "database_id": "d7f5da7a-f633-42c6-8cbb-30116c62af9c"
+    }
+  ]
+}

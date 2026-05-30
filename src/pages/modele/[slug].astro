@@ -1,19 +1,21 @@
 ---
+import { env } from "cloudflare:workers";
 import MainLayout from "../../layouts/MainLayout.astro";
-import { models } from "../../data/models.js";
 
-export async function getStaticPaths() {
-    return models.map((model) => ({
-        params: {
-            slug: model.slug
-        },
-        props: {
-            model
-        }
-    }));
+const slug = Astro.params.slug;
+
+const result = await env.DB
+  .prepare("SELECT * FROM models WHERE slug = ?")
+  .bind(slug)
+  .all();
+
+const model = result.results[0];
+
+if (!model) {
+  return new Response("Model nie istnieje", {
+    status: 404
+  });
 }
-
-const { model } = Astro.props;
 ---
 
 <MainLayout title={model.title}>
@@ -21,12 +23,10 @@ const { model } = Astro.props;
 <section class="model-page">
 
     <div class="hero">
-
         <img
             src={model.image}
             alt={model.title}
         />
-
     </div>
 
     <h1>{model.title}</h1>
@@ -36,50 +36,12 @@ const { model } = Astro.props;
     </p>
 
     <p class="description">
-        {model.shortDescription}
+        {model.short_description}
     </p>
 
     <p class="status">
         Status: {model.status}
     </p>
-
-   <section class="variants">
-
-    <h2>Warianty modelu</h2>
-
-    <div class="variant-grid">
-
-        {
-            model.variants?.map(variant => (
-
-                <div class="variant-card">
-
-                    <h3>
-                        {variant.code}
-                    </h3>
-
-                    <p>
-                        {variant.name}
-                    </p>
-
-                    <p>
-                        Skale:
-                        {variant.scales.join(" • ")}
-                    </p>
-
-                    <p>
-                        Status:
-                        {variant.status}
-                    </p>
-
-                </div>
-
-            ))
-        }
-
-    </div>
-
-</section>
 
     <section class="full-description">
 
@@ -90,76 +52,6 @@ const { model } = Astro.props;
         </p>
 
     </section>
-
-    <section class="gallery">
-
-        <h2>Galeria</h2>
-
-        <div class="gallery-grid">
-
-            {
-                model.gallery.map(image => (
-
-                    <img
-                        src={image}
-                        alt={model.title}
-                    />
-
-                ))
-            }
-
-        </div>
-
-    </section>
-
-    {
-        model.showPurchaseLinks && (
-
-            <section class="purchase">
-
-                <h2>Zakup</h2>
-
-                <div class="buttons">
-
-                    {
-                        model.allegroUrl && (
-                            <a
-                                href={model.allegroUrl}
-                                target="_blank"
-                            >
-                                Allegro
-                            </a>
-                        )
-                    }
-
-                    {
-                        model.etsyUrl && (
-                            <a
-                                href={model.etsyUrl}
-                                target="_blank"
-                            >
-                                Etsy
-                            </a>
-                        )
-                    }
-
-                    {
-                        model.shopUrl && (
-                            <a
-                                href={model.shopUrl}
-                                target="_blank"
-                            >
-                                Sklep
-                            </a>
-                        )
-                    }
-
-                </div>
-
-            </section>
-
-        )
-    }
 
 </section>
 
@@ -196,10 +88,6 @@ h1{
 }
 
 .status{
-    margin-bottom:10px;
-}
-
-.scales{
     margin-bottom:30px;
 }
 
@@ -213,82 +101,6 @@ h1{
 
 .full-description p{
     line-height:1.8;
-}
-
-.gallery{
-    margin-top:60px;
-}
-
-.gallery h2{
-    margin-bottom:20px;
-}
-
-.gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-.gallery-grid img{
-    width:100%;
-    border-radius:10px;
-    border:1px solid #d9d9d9;
-}
-
-.purchase{
-    margin-top:60px;
-}
-
-.purchase h2{
-    margin-bottom:20px;
-}
-
-.buttons{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.buttons a{
-    background:#7a3e2e;
-    color:white;
-    text-decoration:none;
-    padding:12px 20px;
-    border-radius:8px;
-    transition:.2s;
-}
-
-.buttons a:hover{
-    opacity:.9;
-}
-.variants{
-    margin-top:50px;
-}
-
-.variants h2{
-    margin-bottom:20px;
-}
-
-.variant-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-}
-
-.variant-card{
-    border:1px solid #d9d9d9;
-    border-radius:10px;
-    padding:20px;
-    background:white;
-}
-
-.variant-card h3{
-    color:#7a3e2e;
-    margin-bottom:10px;
-}
-
-.variant-card p{
-    margin-bottom:8px;
 }
 
 </style>
