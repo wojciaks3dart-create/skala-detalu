@@ -1,0 +1,85 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Nowy model">
+
+<h1>Dodaj model</h1>
+
+<form class="form">
+
+    <label>Nazwa modelu</label>
+    <input type="text" />
+
+    <label>Slug</label>
+    <input type="text" />
+
+    <label>Kategoria</label>
+    <input type="text" />
+
+    <label>Status</label>
+
+    <select>
+
+        <option>Dostępny</option>
+        <option>W przygotowaniu</option>
+        <option>Projekt</option>
+
+    </select>
+
+    <label>Krótki opis</label>
+
+    <textarea rows="4"></textarea>
+
+    <label>Pełny opis</label>
+
+    <textarea rows="8"></textarea>
+
+    <button type="submit">
+        Utwórz model
+    </button>
+
+</form>
+
+<style>
+
+.form{
+    max-width:900px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+}
+
+input,
+textarea,
+select{
+
+    padding:12px;
+
+    border:1px solid #d9d9d9;
+
+    border-radius:6px;
+}
+
+button{
+
+    width:220px;
+
+    padding:14px;
+
+    background:#7a3e2e;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+</style>
+
+</MainLayout>

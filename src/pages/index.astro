@@ -1,0 +1,238 @@
+---
+
+import MainLayout from "../layouts/MainLayout.astro";
+---
+<MainLayout title="Skala Detalu">
+
+<section class="hero">
+
+<div class="hero-text">
+
+    <h1>Skala Detalu</h1>
+
+    <h2>Modele architektury drukowane w 3D</h2>
+
+    <p>
+        Precyzyjne rekonstrukcje budynków historycznych,
+        kolejowych i przemysłowych wykonywane z dbałością
+        o każdy detal.
+    </p>
+
+    <a href="/modele" class="button">
+        Przeglądaj modele
+    </a>
+
+</div>
+
+<div class="hero-image">
+    <img src="/images/kasina.jpg" alt="Model budynku">
+</div>
+
+
+</section>
+
+<section class="about">
+
+<h2>O działalności</h2>
+
+<p>
+    Skala Detalu specjalizuje się w tworzeniu modeli architektury
+    historycznej, kolejowej i przemysłowej przeznaczonych dla
+    modelarzy, kolekcjonerów oraz miłośników historii.
+</p>
+
+<p>
+    Każdy model opracowywany jest na podstawie dokumentacji
+    fotograficznej, materiałów archiwalnych oraz własnych
+    opracowań 3D.
+</p>
+
+
+</section>
+
+<section class="advantages">
+
+
+<h2>Dlaczego Skala Detalu?</h2>
+
+<div class="features">
+
+    <div class="feature">
+        <h3>Wysoka szczegółowość</h3>
+
+        <p>
+            Wierne odwzorowanie detali architektonicznych
+            i elementów konstrukcyjnych.
+        </p>
+    </div>
+
+    <div class="feature">
+        <h3>Dokumentacja historyczna</h3>
+
+        <p>
+            Projekty powstają na podstawie zdjęć,
+            materiałów źródłowych i analiz obiektów.
+        </p>
+    </div>
+
+    <div class="feature">
+        <h3>Druk żywiczny</h3>
+
+        <p>
+            Bardzo wysoka jakość powierzchni
+            oraz odwzorowania detali.
+        </p>
+    </div>
+
+    <div class="feature">
+        <h3>Skale H0 • TT • N</h3>
+
+        <p>
+            Modele przygotowywane w najpopularniejszych
+            skalach modelarskich.
+        </p>
+    </div>
+
+</div>
+
+
+</section>
+
+<section class="contact-home">
+
+
+<h2>Kontakt</h2>
+
+<p>
+    Masz pytania dotyczące modeli lub współpracy?
+</p>
+
+<a href="/kontakt" class="button">
+    Skontaktuj się
+</a>
+
+
+</section>
+
+<style>
+
+.hero{
+    display:grid;
+    grid-template-columns:45% 55%;
+    gap:50px;
+    align-items:center;
+    min-height:650px;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero h2{
+    margin-bottom:20px;
+}
+
+.hero p{
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.hero-image{
+    display:flex;
+    justify-content:center;
+}
+
+.hero-image img{
+    width:120%;
+    max-width:none;
+}
+
+.button{
+    display:inline-block;
+    background:#7a3e2e;
+    color:white;
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.about{
+    margin-top:80px;
+    max-width:900px;
+}
+
+.about h2{
+    margin-bottom:20px;
+}
+
+.about p{
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.advantages{
+    margin-top:80px;
+}
+
+.advantages h2{
+    margin-bottom:30px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.feature{
+    background:white;
+    border:1px solid #d9d9d9;
+    border-radius:10px;
+    padding:25px;
+}
+
+.feature h3{
+    margin-bottom:15px;
+    color:#7a3e2e;
+}
+
+.feature p{
+    line-height:1.6;
+}
+
+.contact-home{
+    margin-top:80px;
+    margin-bottom:80px;
+    text-align:center;
+}
+
+.contact-home h2{
+    margin-bottom:20px;
+}
+
+.contact-home p{
+    margin-bottom:25px;
+}
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        min-height:auto;
+    }
+
+    .hero-image img{
+        width:100%;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+</MainLayout>

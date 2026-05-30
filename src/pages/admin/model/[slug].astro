@@ -1,0 +1,374 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import { models } from "../../../data/models.js";
+
+export async function getStaticPaths() {
+
+    return models.map(model => ({
+
+        params: {
+            slug: model.slug
+        },
+
+        props: {
+            model
+        }
+
+    }));
+}
+
+const { model } = Astro.props;
+---
+
+
+<MainLayout title={`Edycja ${model.title}`}>
+
+<h1>Edycja modelu</h1>
+
+<div class="form">
+
+    <label>Nazwa modelu</label>
+    <input value={model.title} />
+
+    <label>Kategoria</label>
+    <input value={model.category} />
+
+    <label>Status</label>
+    <input value={model.status} />
+
+    <label>Krótki opis</label>
+    <textarea rows="5">
+{model.shortDescription}
+    </textarea>
+
+    <button>
+        Zapisz
+    </button>
+
+</div>
+<section class="variants">
+
+    <h2>Warianty</h2>
+
+    {
+        model.variants?.map(variant => (
+
+            <div class="variant-row">
+
+                <div>
+
+                    <strong>{variant.code}</strong>
+
+                    <br>
+
+                    {variant.name}
+
+                </div>
+
+                <div>
+
+                    {variant.status}
+
+                </div>
+
+                <a href="#">
+                    Edytuj
+                </a>
+
+            </div>
+
+        ))
+    }
+
+   <a
+    href="/admin/variant/new"
+    class="add-variant"
+>
+    + Dodaj wariant
+</a>
+
+<section class="gallery-section">
+
+    <h2>Galeria</h2>
+    <div class="upload-box">
+
+    <input
+        type="file"
+        accept="image/*"
+    />
+
+</div>
+
+    {
+        model.gallery?.map((image, index) => (
+
+            <div class="gallery-row">
+
+                <span>
+                    Zdjęcie {index + 1}
+                </span>
+
+                <input
+                    type="text"
+                    value={image}
+                />
+
+            </div>
+
+        ))
+    }
+
+    <button class="add-gallery">
+        + Dodaj zdjęcie
+    </button>
+<section class="sales-section">
+
+    <h2>Linki sprzedaży</h2>
+
+    <div class="field">
+
+        <label>
+
+            <input
+                type="checkbox"
+                checked={model.showPurchaseLinks}
+            />
+
+            Pokazuj linki zakupu
+
+        </label>
+
+    </div>
+
+    <div class="field">
+
+        <label>Allegro</label>
+
+        <input
+            type="text"
+            value={model.allegroUrl}
+        />
+
+    </div>
+
+    <div class="field">
+
+        <label>Etsy</label>
+
+        <input
+            type="text"
+            value={model.etsyUrl}
+        />
+
+    </div>
+
+    <div class="field">
+
+        <label>Sklep</label>
+
+        <input
+            type="text"
+            value={model.shopUrl}
+        />
+
+    </div>
+
+</section>
+
+
+
+
+</section>
+
+</section>
+
+<style>
+
+.form{
+
+    max-width:800px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+input,
+textarea{
+
+    padding:12px;
+
+    border:1px solid #d9d9d9;
+
+    border-radius:6px;
+}
+
+button{
+
+    width:200px;
+
+    padding:12px;
+
+    background:#7a3e2e;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.variants{
+    margin-top:50px;
+}
+
+.variant-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    margin-bottom:10px;
+}
+
+.variant-row a{
+
+    background:#7a3e2e;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+}
+
+.add-variant{
+
+    margin-top:20px;
+
+    background:#2f7d32;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.gallery-section{
+    margin-top:60px;
+}
+
+.gallery-section h2{
+    margin-bottom:20px;
+}
+
+.gallery-row{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:12px;
+}
+
+.gallery-row span{
+    min-width:100px;
+    font-weight:bold;
+}
+
+.gallery-row input{
+    flex:1;
+}
+
+.add-gallery{
+    margin-top:15px;
+
+    background:#1565c0;
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+<style>
+
+...
+
+.sales-section{
+    margin-top:60px;
+}
+
+.sales-section h2{
+    margin-bottom:20px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.field label{
+    font-weight:bold;
+}
+
+.field input[type="text"]{
+    padding:12px;
+    border:1px solid #d9d9d9;
+    border-radius:6px;
+}
+
+
+
+
+.upload-box{
+    margin-bottom:20px;
+    padding:20px;
+
+    border:2px dashed #d9d9d9;
+
+    border-radius:10px;
+
+    background:#fafafa;
+}
+.add-variant{
+    display:inline-block;
+    margin-top:20px;
+
+    background:#2f7d32;
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+}
+
+
+
+</style>
+
+</MainLayout>

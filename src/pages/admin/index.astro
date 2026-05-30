@@ -1,0 +1,142 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { models } from "../../data/models.js";
+---
+
+<MainLayout title="Panel Admina">
+
+<section class="admin-header">
+
+    <h1>Panel Admina</h1>
+
+    <a href="/admin/model/new" class="add-button">
+        + Dodaj model
+    </a>
+
+</section>
+
+<section class="admin-table">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Status</th>
+                <th>Akcje</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {
+                models.map(model => (
+
+                    <tr>
+
+                        <td>{model.id}</td>
+
+                        <td>{model.title}</td>
+
+                        <td>{model.category}</td>
+
+                        <td>{model.status}</td>
+
+                        <td>
+
+                            <a
+                                href={`/admin/model/${model.slug}`}
+                                class="edit-button"
+                            >
+                                Edytuj
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                ))
+            }
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<style>
+
+.admin-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+.admin-header h1{
+    font-size:2.5rem;
+}
+
+.add-button{
+
+    background:#7a3e2e;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+}
+
+.admin-table{
+
+    background:white;
+
+    border:1px solid #d9d9d9;
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:16px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+}
+
+th{
+    background:#f5f5f5;
+}
+
+.edit-button{
+
+    background:#7a3e2e;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+}
+
+</style>
+</MainLayout>

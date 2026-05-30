@@ -1,0 +1,77 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Nowy wariant">
+
+<h1>Dodaj wariant</h1>
+
+<form class="form">
+
+    <label>Kod wariantu</label>
+    <input type="text" placeholder="A-R1" />
+
+    <label>Nazwa wariantu</label>
+    <input type="text" placeholder="Wariant A / Dach R1" />
+
+    <label>Status</label>
+
+    <select>
+        <option>Dostępny</option>
+        <option>W przygotowaniu</option>
+        <option>Projekt</option>
+    </select>
+
+    <label>Skale</label>
+
+    <div class="scales">
+
+        <label><input type="checkbox" /> H0</label>
+        <label><input type="checkbox" /> TT</label>
+        <label><input type="checkbox" /> N</label>
+        <label><input type="checkbox" /> 0</label>
+
+    </div>
+
+    <button type="submit">
+        Utwórz wariant
+    </button>
+
+</form>
+
+<style>
+
+.form{
+    max-width:800px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+input,
+textarea,
+select{
+    padding:12px;
+    border:1px solid #d9d9d9;
+    border-radius:6px;
+}
+
+.scales{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    width:220px;
+    padding:14px;
+    background:#7a3e2e;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+</style>
+
+</MainLayout>
